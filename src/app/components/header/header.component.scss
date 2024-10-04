@@ -1,0 +1,11 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #f0f0f0; /* Puedes cambiar el color de fondo */
+}
+
+.logo img {
+  width: 150px; /* Ajusta el ancho del logo según sea necesario */
+}
