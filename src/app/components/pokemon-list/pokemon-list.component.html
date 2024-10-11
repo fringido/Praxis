@@ -2,6 +2,7 @@
   @for (pokemon of pokemons; track $index) {
 
   <h3>{{ pokemon.name | uppercase }}</h3>
+  <img [src]="pokemon.sprites.front_default" alt="">
   }
 </div>
 

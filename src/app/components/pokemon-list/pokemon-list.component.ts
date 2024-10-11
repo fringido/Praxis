@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PokemonsService } from '../../services/pokemons.service';
+import { PokemonDetails } from '../../interface/pokemon-detail';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -10,7 +11,7 @@ import { PokemonsService } from '../../services/pokemons.service';
   styleUrl: './pokemon-list.component.scss'
 })
 export class PokemonListComponent {
-  pokemons: any[] = [];
+  pokemons: PokemonDetails[] = [];
   limit: number = 20;
   offset: number = 0;
 
@@ -21,10 +22,15 @@ export class PokemonListComponent {
   }
 
   getPokemons(): void {
-    this.pokemonService.getPokemonList(this.limit, this.offset).subscribe((data: any) => {
-      this.pokemons = data.results;
+    this.pokemonService.getPokemonList(this.limit, this.offset).subscribe((data) => {
+      const pokemonsList = data.results;
+      this.pokemons = [];
+      pokemonsList.forEach((pokemon) => {
+        this.pokemonService.getMoreData(pokemon.name).subscribe((details) => {
+          this.pokemons.push(details);
+        });
+      });
     });
-    console.log(this.pokemons);
   }
 
 
